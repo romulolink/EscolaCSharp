@@ -49,14 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlunoTypeConfiguration.cs" />
     <Compile Include="Context\EscolaDbContext.cs" />
-    <Compile Include="Migrations\201512041308360_MigracaoInicial.cs" />
-    <Compile Include="Migrations\201512041308360_MigracaoInicial.Designer.cs">
-      <DependentUpon>201512041308360_MigracaoInicial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512041331412_AdicaoTelefone.cs" />
-    <Compile Include="Migrations\201512041331412_AdicaoTelefone.Designer.cs">
-      <DependentUpon>201512041331412_AdicaoTelefone.cs</DependentUpon>
+    <Compile Include="CursoTypeConfiguration.cs" />
+    <Compile Include="Migrations\201512071224068_MigracaoInicial.cs" />
+    <Compile Include="Migrations\201512071224068_MigracaoInicial.Designer.cs">
+      <DependentUpon>201512071224068_MigracaoInicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,13 +68,17 @@
       <Project>{03ccf16f-e2d3-43cd-9c6b-d8880de659e1}</Project>
       <Name>IAE.Escola.Dominio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IAE.Persistence.Common\IAE.Persistence.Entity.Common.csproj">
+      <Project>{af26d0e5-de8e-4871-b450-66a4aed8907f}</Project>
+      <Name>IAE.Persistence.Entity.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512041308360_MigracaoInicial.resx">
-      <DependentUpon>201512041308360_MigracaoInicial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512041331412_AdicaoTelefone.resx">
-      <DependentUpon>201512041331412_AdicaoTelefone.cs</DependentUpon>
+    <Folder Include="TypeConfigurations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201512071224068_MigracaoInicial.resx">
+      <DependentUpon>201512071224068_MigracaoInicial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

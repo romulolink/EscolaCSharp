@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace IAE.Escola.Dominio
 {
-    public class Aluno
+    public class Curso
     {
+
         public long Id { get; set; }
         public string Nome { get; set; }
-        public int Matricula { get; set; }
-        public string Telefone { get; set; }
-        public string Email { get; set; }
-        public DateTime DataNascimento { get; set; }
+        public string Ementa { get; set; }
+        public int CargaHoraria { get; set; }
+        public bool isAtivo { get; set; }
 
     }
-
 }

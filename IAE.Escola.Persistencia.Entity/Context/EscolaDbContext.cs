@@ -11,5 +11,12 @@ namespace IAE.Escola.Persistencia.Entity.Contex
     public class EscolaDbContext : DbContext
     {
         public DbSet<Aluno> Alunos { get; set; }
+        public DbSet<Curso> Cursos { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new AlunoTypeConfiguration());
+            modelBuilder.Configurations.Add(new CursoTypeConfiguration());
+        }
     }
 }

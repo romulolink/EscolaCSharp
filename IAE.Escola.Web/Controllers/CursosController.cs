@@ -11,107 +11,107 @@ using IAE.Escola.Persistencia.Entity.Contex;
 
 namespace IAE.Escola.Web.Controllers
 {
-    public class AlunosController : Controller
+    public class CursosController : Controller
     {
         private EscolaDbContext db = new EscolaDbContext();
 
-        // GET: Alunos
+        // GET: Cursos
         public ActionResult Index()
         {
-            return View(db.Alunos.ToList());
+            return View(db.Cursos.ToList());
         }
 
-        // GET: Alunos/Details/5
-        public ActionResult Details(Guid? id)
+        // GET: Cursos/Details/5
+        public ActionResult Details(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Aluno aluno = db.Alunos.Find(id);
-            if (aluno == null)
+            Curso curso = db.Cursos.Find(id);
+            if (curso == null)
             {
                 return HttpNotFound();
             }
-            return View(aluno);
+            return View(curso);
         }
 
-        // GET: Alunos/Create
+        // GET: Cursos/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Alunos/Create
+        // POST: Cursos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Matricula,Telefone,Email,DataNascimento")] Aluno aluno)
+        public ActionResult Create([Bind(Include = "Id,Nome,Ementa,CargaHoraria,isAtivo")] Curso curso)
         {
             if (ModelState.IsValid)
             {
-                db.Alunos.Add(aluno);
+                db.Cursos.Add(curso);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(aluno);
+            return View(curso);
         }
 
-        // GET: Alunos/Edit/5
-        public ActionResult Edit(Guid? id)
+        // GET: Cursos/Edit/5
+        public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Aluno aluno = db.Alunos.Find(id);
-            if (aluno == null)
+            Curso curso = db.Cursos.Find(id);
+            if (curso == null)
             {
                 return HttpNotFound();
             }
-            return View(aluno);
+            return View(curso);
         }
 
-        // POST: Alunos/Edit/5
+        // POST: Cursos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Matricula,Telefone,Email,DataNascimento")] Aluno aluno)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Ementa,CargaHoraria,isAtivo")] Curso curso)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(aluno).State = EntityState.Modified;
+                db.Entry(curso).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(aluno);
+            return View(curso);
         }
 
-        // GET: Alunos/Delete/5
-        public ActionResult Delete(Guid? id)
+        // GET: Cursos/Delete/5
+        public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Aluno aluno = db.Alunos.Find(id);
-            if (aluno == null)
+            Curso curso = db.Cursos.Find(id);
+            if (curso == null)
             {
                 return HttpNotFound();
             }
-            return View(aluno);
+            return View(curso);
         }
 
-        // POST: Alunos/Delete/5
+        // POST: Cursos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(Guid id)
+        public ActionResult DeleteConfirmed(long id)
         {
-            Aluno aluno = db.Alunos.Find(id);
-            db.Alunos.Remove(aluno);
+            Curso curso = db.Cursos.Find(id);
+            db.Cursos.Remove(curso);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

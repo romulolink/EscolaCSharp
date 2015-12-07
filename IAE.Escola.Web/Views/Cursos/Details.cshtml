@@ -1,0 +1,50 @@
+﻿@model IAE.Escola.Dominio.Curso
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Curso</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ementa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ementa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CargaHoraria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CargaHoraria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isAtivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isAtivo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
