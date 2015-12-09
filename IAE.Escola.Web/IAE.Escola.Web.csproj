@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -125,15 +129,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AutoMapper\PerfilDominioParaViewModel.cs" />
+    <Compile Include="AutoMapper\PerfilViewModelParaDominio.cs" />
     <Compile Include="Controllers\AlunosController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CursoViewModel.cs" />
+    <Compile Include="Models\AlunoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -184,7 +193,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -199,9 +207,17 @@
       <Project>{03ccf16f-e2d3-43cd-9c6b-d8880de659e1}</Project>
       <Name>IAE.Escola.Dominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IAE.Escola.Persistencia.Entity\IAE.Escola.Persistencia.Entity.csproj">
-      <Project>{e12802d3-66aa-49f5-b013-7d132a5a2737}</Project>
-      <Name>IAE.Escola.Persistencia.Entity</Name>
+    <ProjectReference Include="..\IAE.Escola.Repositorio.Entity\IAE.Escola.Repositorio.Entity.csproj">
+      <Project>{54a3a296-2001-4041-94f0-a422c0c3162a}</Project>
+      <Name>IAE.Escola.Repositorio.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IAE.Repository.Common\IAE.Repository.Common.csproj">
+      <Project>{c3d4e992-a049-4d81-9eb1-4ca4ea7e5349}</Project>
+      <Name>IAE.Repository.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IAE.Repository.Entity.Common\IAE.Repository.Entity.Common.csproj">
+      <Project>{1f6c16a7-2585-4480-b2c9-ebe18dff7d66}</Project>
+      <Name>IAE.Repository.Entity.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

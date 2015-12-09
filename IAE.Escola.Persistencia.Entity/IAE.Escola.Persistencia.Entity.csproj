@@ -52,9 +52,9 @@
     <Compile Include="AlunoTypeConfiguration.cs" />
     <Compile Include="Context\EscolaDbContext.cs" />
     <Compile Include="CursoTypeConfiguration.cs" />
-    <Compile Include="Migrations\201512071224068_MigracaoInicial.cs" />
-    <Compile Include="Migrations\201512071224068_MigracaoInicial.Designer.cs">
-      <DependentUpon>201512071224068_MigracaoInicial.cs</DependentUpon>
+    <Compile Include="Migrations\201512081231001_MigracaoInicial.cs" />
+    <Compile Include="Migrations\201512081231001_MigracaoInicial.Designer.cs">
+      <DependentUpon>201512081231001_MigracaoInicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,8 +77,8 @@
     <Folder Include="TypeConfigurations\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512071224068_MigracaoInicial.resx">
-      <DependentUpon>201512071224068_MigracaoInicial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512081231001_MigracaoInicial.resx">
+      <DependentUpon>201512081231001_MigracaoInicial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,6 +13,13 @@ namespace IAE.Escola.Persistencia.Entity.Contex
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Curso> Cursos { get; set; }
 
+        public EscolaDbContext()
+        {
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
+        }
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new AlunoTypeConfiguration());

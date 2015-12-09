@@ -1,39 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
 using IAE.Escola.Dominio;
-using IAE.Escola.Persistencia.Entity.Contex;
+using IAE.Repository.Common;
+using IAE.Escola.Repositorio.Entity;
+using AutoMapper;
+using IAE.Escola.Web.Models;
+using System.Collections.Generic;
 
 namespace IAE.Escola.Web.Controllers
 {
     public class AlunosController : Controller
     {
-        private EscolaDbContext db = new EscolaDbContext();
-
+        private IRepositorioGenerico<Aluno, long> _repositorio = new RepositorioAluno();
+       
         // GET: Alunos
         public ActionResult Index()
         {
-            return View(db.Alunos.ToList());
+            return View(Mapper.Map<List<AlunoViewModel>>
+                (_repositorio.Selecionar()));
         }
 
         // GET: Alunos/Details/5
-        public ActionResult Details(Guid? id)
+        public ActionResult Details(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Aluno aluno = db.Alunos.Find(id);
+            Aluno aluno = _repositorio.SelecionarPelaChave(id.Value);
             if (aluno == null)
             {
                 return HttpNotFound();
             }
-            return View(aluno);
+            return View(Mapper.Map<Aluno, AlunoViewModel>(aluno));
         }
 
         // GET: Alunos/Create
@@ -47,31 +46,31 @@ namespace IAE.Escola.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Matricula,Telefone,Email,DataNascimento")] Aluno aluno)
+        public ActionResult Create([Bind(Include = "Id,Nome,Matricula,Telefone,Email,DataNascimento")] AlunoViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Alunos.Add(aluno);
-                db.SaveChanges();
+                Aluno aluno = Mapper.Map<AlunoViewModel, Aluno>(viewModel);
+                _repositorio.Inserir(aluno);
                 return RedirectToAction("Index");
             }
 
-            return View(aluno);
+            return View(viewModel);
         }
 
         // GET: Alunos/Edit/5
-        public ActionResult Edit(Guid? id)
+        public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Aluno aluno = db.Alunos.Find(id);
+            Aluno aluno = _repositorio.SelecionarPelaChave(id.Value);
             if (aluno == null)
             {
                 return HttpNotFound();
             }
-            return View(aluno);
+            return View(Mapper.Map<Aluno, AlunoViewModel>(aluno));
         }
 
         // POST: Alunos/Edit/5
@@ -79,50 +78,41 @@ namespace IAE.Escola.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Matricula,Telefone,Email,DataNascimento")] Aluno aluno)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Matricula,Telefone,Email,DataNascimento")] AlunoViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(aluno).State = EntityState.Modified;
-                db.SaveChanges();
+                Aluno aluno = Mapper.Map<AlunoViewModel, Aluno>(viewModel);
+                _repositorio.Atualizar(aluno);
                 return RedirectToAction("Index");
             }
-            return View(aluno);
+            return View(viewModel);
         }
 
         // GET: Alunos/Delete/5
-        public ActionResult Delete(Guid? id)
+        public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Aluno aluno = db.Alunos.Find(id);
+            Aluno aluno = _repositorio.SelecionarPelaChave(id.Value);
             if (aluno == null)
             {
                 return HttpNotFound();
             }
-            return View(aluno);
+            return View(Mapper.Map<Aluno, AlunoViewModel>(aluno));
         }
 
         // POST: Alunos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(Guid id)
+        public ActionResult DeleteConfirmed(long id)
         {
-            Aluno aluno = db.Alunos.Find(id);
-            db.Alunos.Remove(aluno);
-            db.SaveChanges();
+            Aluno aluno = _repositorio.SelecionarPelaChave(id);
+            _repositorio.Deletar(aluno);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

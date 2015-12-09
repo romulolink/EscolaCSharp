@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using IAE.Escola.Dominio;
-using IAE.Escola.Persistencia.Entity.Contex;
+using IAE.Repository.Common;
+using IAE.Escola.Repositorio.Entity;
+using AutoMapper;
+using System.Collections.Generic;
+using IAE.Escola.Web.Models;
 
 namespace IAE.Escola.Web.Controllers
 {
     public class CursosController : Controller
     {
-        private EscolaDbContext db = new EscolaDbContext();
+        private IRepositorioGenerico<Curso, long> _repositorio = new RepositorioCurso();
 
         // GET: Cursos
         public ActionResult Index()
         {
-            return View(db.Cursos.ToList());
+            return View(Mapper.Map<List<CursoViewModel>>
+                (_repositorio.Selecionar()));
         }
 
         // GET: Cursos/Details/5
@@ -28,7 +29,7 @@ namespace IAE.Escola.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Curso curso = db.Cursos.Find(id);
+            Curso curso = _repositorio.SelecionarPelaChave(id.Value);
             if (curso == null)
             {
                 return HttpNotFound();
@@ -51,8 +52,7 @@ namespace IAE.Escola.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Cursos.Add(curso);
-                db.SaveChanges();
+                _repositorio.Inserir(curso);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +66,7 @@ namespace IAE.Escola.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Curso curso = db.Cursos.Find(id);
+            Curso curso = _repositorio.SelecionarPelaChave(id.Value);
             if (curso == null)
             {
                 return HttpNotFound();
@@ -83,8 +83,7 @@ namespace IAE.Escola.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(curso).State = EntityState.Modified;
-                db.SaveChanges();
+                _repositorio.Atualizar(curso);
                 return RedirectToAction("Index");
             }
             return View(curso);
@@ -97,7 +96,7 @@ namespace IAE.Escola.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Curso curso = db.Cursos.Find(id);
+            Curso curso = _repositorio.SelecionarPelaChave(id.Value);
             if (curso == null)
             {
                 return HttpNotFound();
@@ -110,19 +109,11 @@ namespace IAE.Escola.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Curso curso = db.Cursos.Find(id);
-            db.Cursos.Remove(curso);
-            db.SaveChanges();
+            Curso curso = _repositorio.SelecionarPelaChave(id);
+            _repositorio.Deletar(curso);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+       
     }
 }
