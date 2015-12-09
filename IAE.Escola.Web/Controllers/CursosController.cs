@@ -48,15 +48,16 @@ namespace IAE.Escola.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Ementa,CargaHoraria,isAtivo")] Curso curso)
+        public ActionResult Create([Bind(Include = "Id,Nome,Ementa,CargaHoraria,isAtivo")] CursoViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
+                Curso curso = Mapper.Map<CursoViewModel, Curso>(viewModel);
                 _repositorio.Inserir(curso);
                 return RedirectToAction("Index");
             }
 
-            return View(curso);
+            return View(viewModel);
         }
 
         // GET: Cursos/Edit/5
@@ -71,7 +72,7 @@ namespace IAE.Escola.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(curso);
+            return View(Mapper.Map<Curso, CursoViewModel>(curso));
         }
 
         // POST: Cursos/Edit/5
@@ -79,14 +80,16 @@ namespace IAE.Escola.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Ementa,CargaHoraria,isAtivo")] Curso curso)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Ementa,CargaHoraria,isAtivo")] CursoViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
+                Curso curso = Mapper.Map<CursoViewModel, Curso>(viewModel);
+
                 _repositorio.Atualizar(curso);
                 return RedirectToAction("Index");
             }
-            return View(curso);
+            return View(viewModel);
         }
 
         // GET: Cursos/Delete/5
@@ -101,7 +104,7 @@ namespace IAE.Escola.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(curso);
+            return View(Mapper.Map<Curso, CursoViewModel>(curso));
         }
 
         // POST: Cursos/Delete/5

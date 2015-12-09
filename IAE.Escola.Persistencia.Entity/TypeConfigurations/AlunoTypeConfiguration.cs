@@ -40,6 +40,10 @@ namespace IAE.Escola.Persistencia.Entity
                 .HasColumnName("ALN_TELEFONE")
                 .HasMaxLength(15)
                 .IsOptional();
+            Property(p => p.TurmaId)
+                .HasColumnOrder(6)
+                .HasColumnName("TRM_ID")
+                .IsOptional();
         }
 
         public override void ConfigurarChaveEstrangeira()

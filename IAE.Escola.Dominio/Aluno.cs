@@ -14,6 +14,8 @@ namespace IAE.Escola.Dominio
         public string Telefone { get; set; }
         public string Email { get; set; }
         public DateTime DataNascimento { get; set; }
+        public int TurmaId { get; set; }
+        public virtual Turma Turma { get; set; }
 
     }
 

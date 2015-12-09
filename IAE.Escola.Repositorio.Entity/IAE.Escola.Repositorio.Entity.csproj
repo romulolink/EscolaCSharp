@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{54A3A296-2001-4041-94F0-A422C0C3162A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IAE.Escola.Repositorio.Entity</RootNamespace>
+    <AssemblyName>IAE.Escola.Repositorio.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositorioAluno.cs" />
+    <Compile Include="RepositorioCurso.cs" />
+    <Compile Include="RepositorioTurma.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IAE.Escola.Dominio\IAE.Escola.Dominio.csproj">
+      <Project>{03ccf16f-e2d3-43cd-9c6b-d8880de659e1}</Project>
+      <Name>IAE.Escola.Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IAE.Escola.Persistencia.Entity\IAE.Escola.Persistencia.Entity.csproj">
+      <Project>{e12802d3-66aa-49f5-b013-7d132a5a2737}</Project>
+      <Name>IAE.Escola.Persistencia.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IAE.Persistence.Common\IAE.Persistence.Entity.Common.csproj">
+      <Project>{af26d0e5-de8e-4871-b450-66a4aed8907f}</Project>
+      <Name>IAE.Persistence.Entity.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IAE.Repository.Common\IAE.Repository.Common.csproj">
+      <Project>{c3d4e992-a049-4d81-9eb1-4ca4ea7e5349}</Project>
+      <Name>IAE.Repository.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IAE.Repository.Entity.Common\IAE.Repository.Entity.Common.csproj">
+      <Project>{1f6c16a7-2585-4480-b2c9-ebe18dff7d66}</Project>
+      <Name>IAE.Repository.Entity.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

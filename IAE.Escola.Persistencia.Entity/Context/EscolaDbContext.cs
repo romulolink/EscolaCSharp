@@ -1,4 +1,5 @@
 ﻿using IAE.Escola.Dominio;
+using IAE.Escola.Persistencia.Entity.TypeConfigurations;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -12,6 +13,7 @@ namespace IAE.Escola.Persistencia.Entity.Contex
     {
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Curso> Cursos { get; set; }
+        public DbSet<Turma> Turma { get; set; }
 
         public EscolaDbContext()
         {
@@ -24,6 +26,7 @@ namespace IAE.Escola.Persistencia.Entity.Contex
         {
             modelBuilder.Configurations.Add(new AlunoTypeConfiguration());
             modelBuilder.Configurations.Add(new CursoTypeConfiguration());
+            modelBuilder.Configurations.Add(new TurmaTypeConfiguration());
         }
     }
 }

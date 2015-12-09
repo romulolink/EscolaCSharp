@@ -49,15 +49,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlunoTypeConfiguration.cs" />
+    <Compile Include="Migrations\201512091117468_AdicaoTurma.cs" />
+    <Compile Include="Migrations\201512091117468_AdicaoTurma.Designer.cs">
+      <DependentUpon>201512091117468_AdicaoTurma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512091407054_LinkAlunoTurma.cs" />
+    <Compile Include="Migrations\201512091407054_LinkAlunoTurma.Designer.cs">
+      <DependentUpon>201512091407054_LinkAlunoTurma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TypeConfigurations\AlunoTypeConfiguration.cs" />
     <Compile Include="Context\EscolaDbContext.cs" />
-    <Compile Include="CursoTypeConfiguration.cs" />
+    <Compile Include="TypeConfigurations\CursoTypeConfiguration.cs" />
     <Compile Include="Migrations\201512081231001_MigracaoInicial.cs" />
     <Compile Include="Migrations\201512081231001_MigracaoInicial.Designer.cs">
       <DependentUpon>201512081231001_MigracaoInicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeConfigurations\TurmaTypeConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -73,12 +82,16 @@
       <Name>IAE.Persistence.Entity.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TypeConfigurations\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201512081231001_MigracaoInicial.resx">
       <DependentUpon>201512081231001_MigracaoInicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512091117468_AdicaoTurma.resx">
+      <DependentUpon>201512091117468_AdicaoTurma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512091407054_LinkAlunoTurma.resx">
+      <DependentUpon>201512091407054_LinkAlunoTurma.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
