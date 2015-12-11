@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IAE.Escola.Dominio;
 using IAE.Escola.Repositorio.Entity;
+using IAE.Escola.Web.Models;
 using IAE.Repository.Common;
 using System;
 using System.Collections.Generic;
@@ -13,17 +14,46 @@ namespace IAE.Escola.Web.Controllers
 {
     public class TurmasController : Controller
     {
-        private IRepositorioGenerico<Turma, int> _repositorio 
+        private IRepositorioGenerico<Turma, int> _repositorioturma 
             = new RepositorioTurma();
+
+        private IRepositorioGenerico<Aluno, long> _repositorioAluno
+            = new RepositorioAluno();
 
         // GET: Turmas
         public ActionResult Index()
         {
             List<TurmaViewModel> viewModels =
-               Mapper.Map<List<Turma>, List<TurmaViewModel>>(_repositorio.Selecionar());
+               Mapper.Map<List<Turma>, List<TurmaViewModel>>(_repositorioturma.Selecionar());
              
             return View(viewModels);
 
+        }
+
+        public ActionResult AdicionarAlunos(int turmaId)
+        {
+            Turma turma = _repositorioturma.SelecionarPelaChave(turmaId);
+
+            TurmaViewModel viewModel = Mapper.Map<Turma, TurmaViewModel>(turma);
+
+            List<AlunoViewModel> alunos 
+                = Mapper.Map<List<Aluno>, List<AlunoViewModel>>(_repositorioAluno.Selecionar().Where(a => a.TurmaId == null).ToList());
+
+            //ViewData["ListaAlunos"] = alunos;
+            ViewBag.ListaAlunos = new SelectList(alunos, "Id", "Nome");
+            return View(viewModel);
+      
+        }
+
+        [HttpPost]
+        public ActionResult AdicionarAluno(int idTurma, long idAluno)
+        {
+            Aluno aluno = _repositorioAluno.SelecionarPelaChave(idAluno);
+            aluno.TurmaId = idTurma;
+            _repositorioAluno.Atualizar(aluno);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+
+            
         }
 
         // GET: Turmas/Details/5
@@ -34,7 +64,7 @@ namespace IAE.Escola.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Turma turma = _repositorio.SelecionarPelaChave(id.Value);
+            Turma turma = _repositorioturma.SelecionarPelaChave(id.Value);
             TurmaViewModel viewModel = Mapper.Map<Turma, TurmaViewModel>(turma);
             return View(viewModel);
         }
@@ -54,7 +84,7 @@ namespace IAE.Escola.Web.Controllers
             {
                 Turma novaTurma = Mapper.Map<TurmaViewModel, Turma>(viewModel);
                 novaTurma.IsAtivo = true;
-                _repositorio.Inserir(novaTurma);
+                _repositorioturma.Inserir(novaTurma);
                 return RedirectToAction("index");
             }
             else
@@ -66,7 +96,7 @@ namespace IAE.Escola.Web.Controllers
         // GET: Turmas/Edit/5
         public ActionResult Edit(int id)
         {
-            Turma turma = _repositorio.SelecionarPelaChave(id);
+            Turma turma = _repositorioturma.SelecionarPelaChave(id);
             TurmaViewModel viewModel 
                 = Mapper.Map<Turma, TurmaViewModel>(turma);
 
@@ -82,7 +112,7 @@ namespace IAE.Escola.Web.Controllers
 
                 Turma turma =  Mapper.Map<TurmaViewModel, Turma>(viewModel);
 
-                _repositorio.Atualizar(turma);
+                _repositorioturma.Atualizar(turma);
 
                 return RedirectToAction("index");
 
@@ -108,8 +138,8 @@ namespace IAE.Escola.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Turma turma = _repositorio.SelecionarPelaChave(id);
-            _repositorio.Atualizar(turma);
+            Turma turma = _repositorioturma.SelecionarPelaChave(id);
+            _repositorioturma.Atualizar(turma);
             return RedirectToAction("Index");
         }
     }

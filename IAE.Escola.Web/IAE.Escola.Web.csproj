@@ -145,7 +145,7 @@
     <Compile Include="Models\CursoViewModel.cs" />
     <Compile Include="Models\AlunoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TurmaViewModel.cs" />
+    <Compile Include="Models\TurmaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -197,6 +197,7 @@
     <Content Include="Views\Turmas\Details.cshtml" />
     <Content Include="Views\Turmas\Edit.cshtml" />
     <Content Include="Views\Turmas\Delete.cshtml" />
+    <Content Include="Views\Turmas\AdicionarAlunos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using IAE.Escola.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace IAE.Escola.Web
+namespace IAE.Escola.Web.Models
 {
     public class TurmaViewModel
     {
@@ -20,5 +21,7 @@ namespace IAE.Escola.Web
         [Required(ErrorMessage = "A flag de ativação é obrigatória")]
         [DisplayName("Turma ativa?")]
         public bool IsAtivo { get; set; }
+
+        public List<AlunoViewModel> Alunos { get; set;  }
     }
 }

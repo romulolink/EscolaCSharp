@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace IAE.Escola.Repositorio.Entity
 {
@@ -16,6 +17,17 @@ namespace IAE.Escola.Repositorio.Entity
             : base(new EscolaDbContext())
         {
 
+        }
+
+        public override List<Turma> Selecionar()
+        {
+            return _contexto.Set<Turma>().Include(p => p.Alunos).ToList();
+        }
+
+        public override Turma SelecionarPelaChave(int chave)
+        {
+            return _contexto.Set<Turma>().Include(path => path.Alunos)
+                .Where(w => w.Id == chave).FirstOrDefault();
         }
 
     }
