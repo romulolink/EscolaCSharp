@@ -1,4 +1,4 @@
-﻿@model IEnumerable<IAE.Escola.Web.Models.TurmaViewModel>
+﻿@model IEnumerable<IAE.Escola02.Web.Models.TurmaViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -31,9 +31,8 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }) | 
-            @Html.ActionLink("Adicionar alunos", "AdicionarAlunos", new { turmaId = item.Id })
-
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }) |
+            @Html.ActionLink("Adicionar alunos", "AdicionarAlunos", new { turmaId = item.Id})
         </td>
     </tr>
 }

@@ -1,4 +1,5 @@
 ﻿using IAE.Escola.Web.App_Start;
+using IAE.Escola.Web.Ninject.Factories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace IAE.Escola.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             AutoMapperConfig.Configure();
+            ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
+
         }
     }
 }

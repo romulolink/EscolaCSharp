@@ -1,23 +1,34 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using IAE.Escola.Dominio;
 using IAE.Repository.Common;
 using IAE.Escola.Repositorio.Entity;
 using AutoMapper;
 using IAE.Escola.Web.Models;
-using System.Collections.Generic;
 
 namespace IAE.Escola.Web.Controllers
 {
     public class AlunosController : Controller
     {
-        private IRepositorioGenerico<Aluno, long> _repositorio = new RepositorioAluno();
-       
+        private IRepositorioGenerico<Aluno, long> _repositorio ;
+
+        public AlunosController(IRepositorioGenerico<Aluno, long> repositorio
+            )
+        {
+            _repositorio = repositorio;
+        }
+
+
         // GET: Alunos
         public ActionResult Index()
         {
-            return View(Mapper.Map<List<AlunoViewModel>>
-                (_repositorio.Selecionar()));
+            return View(Mapper.Map<List<Aluno>, List<AlunoViewModel>>(_repositorio.Selecionar()));
         }
 
         // GET: Alunos/Details/5
@@ -46,7 +57,8 @@ namespace IAE.Escola.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Matricula,Telefone,Email,DataNascimento")] AlunoViewModel viewModel)
+
+        public ActionResult Create([Bind(Include = "Id,Nome,Telefone,Matricula,Email,DataNascimento")] AlunoViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +90,7 @@ namespace IAE.Escola.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Matricula,Telefone,Email,DataNascimento")] AlunoViewModel viewModel)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Telefone,Matricula,Email,DataNascimento")] AlunoViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -114,5 +126,6 @@ namespace IAE.Escola.Web.Controllers
             return RedirectToAction("Index");
         }
 
+   
     }
 }

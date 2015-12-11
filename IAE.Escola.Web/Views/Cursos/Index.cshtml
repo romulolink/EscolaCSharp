@@ -1,5 +1,7 @@
-﻿@using IAE.Escola.Web.Models
+﻿
+@using IAE.Escola02.Web.Models
 @model IEnumerable<CursoViewModel>
+
 
 @{
     ViewBag.Title = "Index";
@@ -22,7 +24,7 @@
             @Html.DisplayNameFor(model => model.CargaHoraria)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.isAtivo)
+            @Html.DisplayNameFor(model => model.Ativo)
         </th>
         <th></th>
     </tr>
@@ -39,7 +41,7 @@
             @Html.DisplayFor(modelItem => item.CargaHoraria)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.isAtivo)
+            @Html.DisplayFor(modelItem => item.Ativo)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

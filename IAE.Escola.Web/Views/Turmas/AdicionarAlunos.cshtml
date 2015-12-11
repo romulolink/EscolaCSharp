@@ -1,83 +1,85 @@
-﻿@model  IAE.Escola.Web.Models.TurmaViewModel
+﻿@model IAE.Escola02.Web.Models.TurmaViewModel
 
 @{
-    ViewBag.Title = "Adicionar aluno";
+    ViewBag.Title = "AdicionarAlunos";
 }
 
-<h2>Adicionar Aluno</h2>
+<h2>Adicionar alunos</h2>
+
 
 <div class="row">
     <div class="col-md-9">
-        @Html.DropDownList("idAluno", (SelectList)ViewBag.ListaAlunos, new { @class = "form-control", id = "cmbAlunos"})
+
+        @Html.DropDownList("idAluno", (SelectList)ViewBag.ListaAlunos, new { @class = "form-control", id = "cmbAlunos" })
+
     </div>
 
     <div class="col-md-3">
+        <button class="btn btn-default" id="btnVincular">Vincular!</button>
 
-        <button class="btn btn-default" id="btnVincular">
-            <i class="glyphicon glyphicon-send"></i>
-        Vincular</button> 
     </div>
 </div>
+
 
 <table class="table" id="tblAlunos">
     <thead>
         <tr>
             <th>
-               Nome do aluno
+                Nome do aluno
             </th>
-
+      
         </tr>
     </thead>
+
     <tbody>
         @foreach (var item in Model.Alunos)
         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nome)
-                </td>   
+                </td>           
             </tr>
         }
-
     </tbody>
 
 </table>
 
 @section scripts {
-
+    
     <script type="text/javascript">
 
         $(document).ready(function () {
-
             $("#btnVincular").click(function () {
-
                 var aluno = $("#cmbAlunos").val();
                 var turma = @Model.Id;
                 $.ajax({
-                
-                    method: "POST",
-                    url:    "@Url.Action("AdicionarAluno","Turmas")",
-                    data: {idTurma: turma, idAluno: aluno},
-                    success: function(){
-                        var nomeAluno = $("#cmbAlunos option:selected").text();
-                        $("#cmbAlunos option:selected").remove();
-                        $("#tblAlunos > tbody").append(
-                            
-                            "<tr>" + 
-                            " <td>" + 
-                            "    " + nomeAluno + 
-                            " </td>" + 
-                            "</tr>"
+                method: "POST", 
+                url: "@Url.Action("AdicionarAluno", "Turmas")",
+                data: {idTurma: turma, idAluno: aluno},
+                success: function() {
 
-                            );
-                    },
-                    error: function(){
-                        alert("Deu ruim!");
+                    var nomeAluno = $("#cmbAlunos option:selected").text();
+                    $("#cmbAlunos option:selected").remove();
+                    $("#tblAlunos > tbody").append(
+                        "<tr>" +
+                        "   <td>" +
+                        "       " + nomeAluno +
+                        "</tr>"
+
+                     );
+
+
+
+                }    ,
+                error: function() {
+                    alert("Deu ruim!");
+
                     }
 
-                }) 
-            }
+                })
+            });
+        });
 
-        )});
-        
     </script>
-}
+    
+    }

@@ -1,12 +1,10 @@
-﻿@using IAE.Escola.Web.Models
-@model CursoViewModel
+﻿@model IAE.Escola.Dominio.Curso
 
 @{
     ViewBag.Title = "Create";
 }
 
 <h2>Create</h2>
-
 
 @using (Html.BeginForm()) 
 {
@@ -41,11 +39,11 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.isAtivo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.isAtivo)
-                    @Html.ValidationMessageFor(model => model.isAtivo, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Ativo)
+                    @Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -61,7 +59,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

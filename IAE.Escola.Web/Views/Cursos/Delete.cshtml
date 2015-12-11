@@ -1,5 +1,4 @@
-﻿@using IAE.Escola.Web.Models
-@model CursoViewModel
+﻿@model IAE.Escola.Dominio.Curso
 
 @{
     ViewBag.Title = "Delete";
@@ -37,11 +36,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.isAtivo)
+            @Html.DisplayNameFor(model => model.Ativo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.isAtivo)
+            @Html.DisplayFor(model => model.Ativo)
         </dd>
 
     </dl>

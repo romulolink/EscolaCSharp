@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IAE.Escola.Web</RootNamespace>
-    <AssemblyName>IAE.Escola.Web</AssemblyName>
+    <RootNamespace>IAE.Escola02.Web</RootNamespace>
+    <AssemblyName>IAE.Escola02.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -61,6 +61,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -144,8 +148,11 @@
     </Compile>
     <Compile Include="Models\CursoViewModel.cs" />
     <Compile Include="Models\AlunoViewModel.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\TurmaViewModel.cs" />
+    <Compile Include="Ninject\Factories\NinjectControllerFactory.cs" />
+    <Compile Include="Ninject\Modules\RepositorioAlunoNinjectModule.cs" />
+    <Compile Include="Ninject\Modules\RepositorioTurmaNinjectModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -168,7 +175,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -194,9 +203,9 @@
     <Content Include="Views\Cursos\Index.cshtml" />
     <Content Include="Views\Turmas\Index.cshtml" />
     <Content Include="Views\Turmas\Create.cshtml" />
-    <Content Include="Views\Turmas\Details.cshtml" />
     <Content Include="Views\Turmas\Edit.cshtml" />
     <Content Include="Views\Turmas\Delete.cshtml" />
+    <Content Include="Views\Turmas\Details.cshtml" />
     <Content Include="Views\Turmas\AdicionarAlunos.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -212,19 +221,19 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IAE.Escola.Dominio\IAE.Escola.Dominio.csproj">
-      <Project>{03ccf16f-e2d3-43cd-9c6b-d8880de659e1}</Project>
+      <Project>{e6f28f75-1744-48ed-8173-4c03278614af}</Project>
       <Name>IAE.Escola.Dominio</Name>
     </ProjectReference>
     <ProjectReference Include="..\IAE.Escola.Repositorio.Entity\IAE.Escola.Repositorio.Entity.csproj">
-      <Project>{54a3a296-2001-4041-94f0-a422c0c3162a}</Project>
+      <Project>{8d0ed9e7-fdbf-4ed8-a258-476892f84eaf}</Project>
       <Name>IAE.Escola.Repositorio.Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\IAE.Repository.Common\IAE.Repository.Common.csproj">
-      <Project>{c3d4e992-a049-4d81-9eb1-4ca4ea7e5349}</Project>
+      <Project>{c89f8ecb-1630-41f6-b01a-5e7df8853282}</Project>
       <Name>IAE.Repository.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\IAE.Repository.Entity.Common\IAE.Repository.Entity.Common.csproj">
-      <Project>{1f6c16a7-2585-4480-b2c9-ebe18dff7d66}</Project>
+      <Project>{f57d1fb9-84a7-490e-bb5e-a711f41cb0ba}</Project>
       <Name>IAE.Repository.Entity.Common</Name>
     </ProjectReference>
   </ItemGroup>
@@ -244,9 +253,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>56164</DevelopmentServerPort>
+          <DevelopmentServerPort>52370</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:56164/</IISUrl>
+          <IISUrl>http://localhost:52370/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

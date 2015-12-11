@@ -1,12 +1,15 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using IAE.Escola.Dominio;
 using IAE.Repository.Common;
 using IAE.Escola.Repositorio.Entity;
 using AutoMapper;
-using System.Collections.Generic;
 using IAE.Escola.Web.Models;
 
 namespace IAE.Escola.Web.Controllers
@@ -18,8 +21,7 @@ namespace IAE.Escola.Web.Controllers
         // GET: Cursos
         public ActionResult Index()
         {
-            return View(Mapper.Map<List<CursoViewModel>>
-                (_repositorio.Selecionar()));
+            return View(Mapper.Map<List<Curso>, List<CursoViewModel>>(_repositorio.Selecionar()));
         }
 
         // GET: Cursos/Details/5
@@ -34,7 +36,7 @@ namespace IAE.Escola.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(curso);
+            return View(Mapper.Map<Curso, CursoViewModel>(curso));
         }
 
         // GET: Cursos/Create
@@ -43,12 +45,13 @@ namespace IAE.Escola.Web.Controllers
             return View();
         }
 
-        // POST: Cursos/Create
+        // POST: Cursoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Ementa,CargaHoraria,isAtivo")] CursoViewModel viewModel)
+
+        public ActionResult Create([Bind(Include = "Id,Nome,Ementa,CargaHoraria,Ativo")] CursoViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -80,21 +83,23 @@ namespace IAE.Escola.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Ementa,CargaHoraria,isAtivo")] CursoViewModel viewModel)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Ementa,CargaHoraria,Ativo")]  CursoViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
                 Curso curso = Mapper.Map<CursoViewModel, Curso>(viewModel);
-
                 _repositorio.Atualizar(curso);
                 return RedirectToAction("Index");
             }
             return View(viewModel);
+
         }
 
         // GET: Cursos/Delete/5
         public ActionResult Delete(long? id)
         {
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -105,7 +110,13 @@ namespace IAE.Escola.Web.Controllers
                 return HttpNotFound();
             }
             return View(Mapper.Map<Curso, CursoViewModel>(curso));
+
+
         }
+
+   
+
+
 
         // POST: Cursos/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -117,6 +128,6 @@ namespace IAE.Escola.Web.Controllers
             return RedirectToAction("Index");
         }
 
-       
+
     }
 }
