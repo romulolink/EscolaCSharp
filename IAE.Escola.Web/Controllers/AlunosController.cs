@@ -14,6 +14,7 @@ using IAE.Escola.Web.Models;
 
 namespace IAE.Escola.Web.Controllers
 {
+    [Authorize]
     public class AlunosController : Controller
     {
         private IRepositorioGenerico<Aluno, long> _repositorio ;

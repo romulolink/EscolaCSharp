@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace IAE.Escola.Web.Controllers
 {
+    [Authorize]
     public class TurmasController : Controller
     {
 
@@ -49,12 +50,14 @@ namespace IAE.Escola.Web.Controllers
             return View(viewModel);
         }
 
-        // GET: Turmas/Create
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Create()
         {
             return View();
         }
 
+
+        [Authorize(Roles = "ADMIN")]
         // POST: Turmas/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -27,6 +27,17 @@
                     <li>@Html.ActionLink("Alunos", "Index", "Alunos")</li>
                     <li>@Html.ActionLink("Cursos", "Index", "Cursos")</li>
                     <li>@Html.ActionLink("Turmas", "Index", "Turmas")</li>
+                    @if(!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Fazer login", "Login", "Contas")</li>
+
+                    }
+                    else
+                    {
+                        <li>Bem vindo, @User.Identity.Name</li>
+                        <li>@Html.ActionLink("Fazer logoff", "Logoff", "Contas")</li>
+
+                    }
                 </ul>
             </div>
         </div>
